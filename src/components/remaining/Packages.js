@@ -3,7 +3,7 @@ import Searchresult from '../partials/Searchresult';
 
 function Packages() {
   return (
-    <div class="section">
+    <div className="section">
     	Our Packages
     	<input type="text" name="search" placeholder="Search package"/><button>Filter</button>
     	<Searchresult />
