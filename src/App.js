@@ -10,22 +10,21 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
 } from "react-router-dom";
 
 function App() {
 	return (
 		<Router>
-			<div class="App">
+			<div className="App">
 				<Navbar/>
 				<Switch>
-					<Route path="/packages" exact="true">
+					<Route path="/packages" exact={true}>
 						<Packages />
 					</Route>
-					<Route path="/contactus" exact="true">
+					<Route path="/contactus" exact={true}>
 						<Contactus />
 					</Route>
-					<Route path="/" exact="true">
+					<Route path="/" exact={true}>
 						<Home />
 					</Route>
 				</Switch>
