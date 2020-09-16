@@ -1,0 +1,48 @@
+.packages{
+	display: flex;
+	justify-content: center;
+	min-width: 100vh;
+}
+
+.packages-body{
+	width: 90%;
+	max-width: 1500px;
+}
+
+.packages-form{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.packages-form-inputplace{
+	flex: 0.4;
+	overflow: hidden;
+}
+
+.packages-form-inputplace input{
+	border: 1px solid grey;
+	box-sizing: border-box;
+	font-size: 24px;
+	width: 100%;
+	padding: 6px 15px;
+}
+
+.packages-form button{
+	flex: 0.2;
+	font-size: 24px;
+}
+
+.packages-title{
+	font-size: 1.4em;
+	margin-bottom: 1em;
+}
+
+.packages-empty{
+	font-size: 30px;
+	margin-top: 50px;
+	color: lightgrey;
+	text-align: center;
+}

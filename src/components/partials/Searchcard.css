@@ -1,0 +1,24 @@
+.searchcard{
+	width: 100%;
+	border: 1px solid grey;
+	margin-bottom: 10px;
+}
+
+.searchcard-body{
+	padding: 20px;
+	display: flex;
+	flex-direction: row;
+}
+
+.searchcard-right{
+	flex: 0.3;
+}
+
+.searchcard-right > img{
+	height: 200px;
+	object-fit: cover;
+}
+
+.searchcard-left{
+	flex: 0.7;
+}
