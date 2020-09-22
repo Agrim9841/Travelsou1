@@ -1,0 +1,164 @@
+.packagedetail{
+	background-color: rgb(248,248,248);
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.packagedetail-body{
+	width: 90%;
+	max-width: 1500px;
+	display: flex;
+	flex-direction: row;
+}
+
+.packagedetail-left{
+	flex: 0.8;
+}
+
+.packagedetail-right{
+	flex: 0.2;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding-top: 100px;
+}
+
+.packagedetail-right a{
+	padding-bottom: 20px;
+	font-size: 1.3em;
+	color: red;
+	text-decoration: none;
+}
+
+.page-title{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: rgb(100,100,100);
+}
+
+.packagedetail-image{
+	border-bottom: 1px solid grey;
+	border-right: 1px solid grey;
+}
+.packagedetail-image img{
+	width: 90%;
+	height: 500px;
+	object-fit: cover;
+}
+
+.packagedetail-title{
+	padding:10px;
+	margin-top: 30px;
+	color: rgb(100,100,100);
+}
+
+.packagedetail-overview{
+	padding-left: 20px;
+	color: grey;
+}
+
+.packagedetail-detailbox{
+	margin-top: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+	color: grey;
+}
+
+.packagedetail-detailbox .green{
+	color: green;
+	font-weight: bolder;
+}
+
+.packagedetail-detailbox .lar{
+	font-size: 3.5em;
+}
+
+.packagedetail-form{
+	display: flex;
+	align-items: flex-end;
+	text-align: center;
+}
+
+.packagedetail-form .x{
+	padding: 10px;
+	color: grey;
+}
+
+.packagedetail-form input{
+	width: 40px;
+	height: 30px;
+}
+
+.packagedetail-form button{
+	background-color: red;
+	color: white;
+	border: none;
+	padding : 10px;
+	border-radius: 3px;
+	box-shadow: 2px 2px 1px grey;
+	font-size: 1.2em;
+}
+
+.packagedetail-form button:hover, .packagedetail-inactivestar:hover{
+	cursor: pointer;
+}
+
+.packagedetail-inactivestar{
+	padding : 7px 10px;
+	border-radius: 3px;
+	border: 2px solid grey;
+	color: grey;
+	font-size: 1.2em;
+	box-shadow: 2px 2px 1px lightgrey;
+	margin-left: 10px;
+}
+
+.descriptionbox{
+	display: flex;
+	flex-direction: row;
+}
+
+.packagedetail-descriptionbox-left{
+	flex: 0.1;
+	padding: 10px;
+	background-color: grey;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.3em;
+	border-bottom: 1px solid white;
+}
+
+.packagedetail-descriptionbox-right{
+	flex: 0.9;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	overflow: auto;
+	border-bottom: 1px solid grey;
+	border-right: 1px solid grey;
+}
+
+.description-circle{
+	font-size: 1.2em;
+	display: inline-block;
+	height: 130px;
+	width: 130px;
+	background-color: red;
+	border-radius: 200px;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	margin-right: 30px;
+}
+
+.description-transportation{
+	margin-right: 30px;
+	color: red;
+}
