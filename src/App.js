@@ -51,14 +51,16 @@ function App() {
 					<Route path="/signup" exact={true}>
 						<Signup />
 					</Route>
+					
 					<Route path="/dashboard" exact={true}>
 						<Dashboard />
 					</Route>
-					<Route path="/package/:id" exact={true}>
-						<Packagedetail />
-					</Route>
 					<Route path="/conformation" exact={true}>
 						<Conformation />
+					</Route>
+
+					<Route path="/package/:id" exact={true}>
+						<Packagedetail />
 					</Route>
 					<Route path="/packages" exact={true}>
 						<Packages />

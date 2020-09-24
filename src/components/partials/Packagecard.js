@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Packagecard.css';
 import { useHistory } from 'react-router-dom';
 import CurrencyFormat from 'react-currency-format';

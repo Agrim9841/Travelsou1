@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { db } from '../Firebase';
+import { gsap } from 'gsap';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import './Packagedetail.css';
 import { useStateValue } from'../StateProvider';
+import CurrencyFormat from 'react-currency-format';
 
 function Packagedetail() {
 	const { id } = useParams();
@@ -12,7 +14,12 @@ function Packagedetail() {
 
 	const [pack, setPack] = useState({});
 	const [description, setDescription] = useState([]);
+	const [imageList, setImageList] = useState([]);
 	const [ticketno, setTicketno] = useState(1);
+	const [currImg, setcurrImg] = useState(0);
+
+	const imageRefs = useRef([]);
+	imageRefs.current = [];
 
 	useEffect(()=>{	
 		db.collection("project").doc(id)
@@ -20,8 +27,119 @@ function Packagedetail() {
 			var temppack = data.data();
 			setPack(temppack);
 			setDescription(temppack.description);
+			setImageList(temppack.image1);
+		}).then(()=>{
+			imageRefs.current.forEach((el, index) => {
+		 		if( index === currImg){
+		 			gsap.fromTo(el,{
+						x: 0,
+					},
+					{
+						duration: 0.3,
+						x: 0,
+					});
+		 		}else{
+		 			gsap.fromTo(el,{
+						x: '0%',
+					},
+					{
+						duration: 0.3,
+						x: '100%',
+					});
+		 		}
+				
+		 
+			});
 		});
+
 	}, []);
+
+	const addToRefs = (e) => {
+		if(e && !imageRefs.current.includes(e)){
+			imageRefs.current.push(e);
+		}
+	}
+
+	const moveToLeft = () => {
+		let num = currImg;	
+
+		if(num+1 === imageList.length){
+			setcurrImg(0);
+			gsap.fromTo(imageRefs.current[num],{
+				x: '0',
+			},
+			{
+				duration: 0.3,
+				x: '-100%',
+			});
+
+			gsap.fromTo(imageRefs.current[0],{
+				x: '100%',
+			},
+			{
+				duration: 0.3,
+				x: '0',
+			});
+		}else{
+			setcurrImg(cur=> cur+1);
+			gsap.fromTo(imageRefs.current[num],{
+				x: '0',
+			},
+			{
+				duration: 0.3,
+				x: '-100%',
+			});
+
+			gsap.fromTo(imageRefs.current[num+1],{
+				x: '100%',
+			},
+			{
+				duration: 0.3,
+				x: '0',
+			});
+		}
+
+	}
+
+	const moveToRight = () => {
+		let num = currImg;	
+
+		if(num-1 === -1){
+			setcurrImg(imageList.length-1);
+			gsap.fromTo(imageRefs.current[num],{
+				x: '0',
+			},
+			{
+				duration: 0.3,
+				x: '100%',
+			});
+
+			gsap.fromTo(imageRefs.current[imageList.length-1],{
+				x: '-100%',
+			},
+			{
+				duration: 0.3,
+				x: '0',
+			});
+		}else{
+			setcurrImg(cur=> cur-1);
+			gsap.fromTo(imageRefs.current[num],{
+				x: '0',
+			},
+			{
+				duration: 0.3,
+				x: '100%',
+			});
+
+			gsap.fromTo(imageRefs.current[num-1],{
+				x: '-100%',
+			},
+			{
+				duration: 0.3,
+				x: '0',
+			});
+		}
+	}
 
 	const handleTicketno = (e) =>{
 		let val = e.target.value;
@@ -54,13 +172,33 @@ function Packagedetail() {
 	};
 
 	return (
-		<div className="packagedetail">
-			<div className="packagedetail-body">
+		<div className="section">
+			<div className="section-body packagedetail-body">
 				<div className="packagedetail-left">
 					<h1 className="page-title">{pack.packagename}</h1>
 					
-					<div className="packagedetail-image" id="photos">
-						<img src={pack.image1} alt=""/>
+					<div className="packagedetail-imagegroup" id="photos">
+						<div className="packagedetail-imagegroupleft" id="photos">
+							<div className="left-image-control" onClick={moveToLeft}>
+								<i className="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+							</div>
+							<div className="right-image-control" onClick={moveToRight}>
+								<i className="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
+							</div>
+							
+							{imageList.map((image, index)=>{
+								return(
+									<img src={image} ref={addToRefs} key={index} alt=""/>
+								);
+							})}
+						</div>
+						<div className="packagedetail-imagegroupright" id="photos">
+							{imageList.map((image, index)=>{
+								return(
+									<img src={image} key={index} alt=""/>
+								);
+							})}
+						</div>
 					</div>
 					<h2 className="packagedetail-title" id="overview">Overview</h2>
 					<div className="packagedetail-overview">
@@ -69,7 +207,7 @@ function Packagedetail() {
 					<div className='packagedetail-detailbox'>
 						<div>
 							<h3>Book for tickets here</h3>
-							<span className="green lar">NRs. {pack.price}</span><strong> /- per person</strong>
+							<span className="green lar">NRs. <CurrencyFormat value={pack.price} displayType={'text'} thousandSeparator={true} /></span><strong> /- per person</strong>
 						</div>
 						<form className="packagedetail-form">
 							<input type="number" value={ticketno} onChange={handleTicketno} />
