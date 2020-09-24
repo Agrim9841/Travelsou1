@@ -1,4 +1,5 @@
 import React from 'react';
+import './Dashboard.css';
 import { useStateValue } from'../StateProvider';
 import {auth} from '../Firebase';
 import { useHistory } from 'react-router-dom';
@@ -18,10 +19,10 @@ function Dashboard() {
 
 	if (user){
 		return (
-			<div className="dashboard">
-				
-				<button onClick={logout}>Logout</button>
-				
+			<div className="section">
+				<div className="section-body">
+					<button onClick={logout}>Logout</button>
+				</div>
 			</div>
 		);
 	}else{

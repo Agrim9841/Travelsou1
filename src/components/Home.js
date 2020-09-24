@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Home.css';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+import { gsap } from "gsap";
 
 function Home() {
 	const history = useHistory();
@@ -12,6 +13,9 @@ function Home() {
 		if(search){
 			setHomeSearch(search);
 		}
+		gsap.from(`.home-title1`, { duration: 0.5, opacity: 0, x: "-100" });
+		gsap.from(`.home-title2`, { duration: 0.7, opacity: 0, x: "100", delay: 0.3 });
+		gsap.from(`.home-form`, { duration: 1, opacity: 0, y: "100", delay: 1, ease: "back.out(5)" });
 	}, []);
 
 	const handleHomeSearchChange = (e) =>{

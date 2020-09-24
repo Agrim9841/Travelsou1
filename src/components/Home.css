@@ -28,7 +28,7 @@
 	height: 100vh;
 	width: 100vw;
 	top: 0;
-	background-image: url("https://firebasestorage.googleapis.com/v0/b/travelsoul-8adb3.appspot.com/o/chitwan1.jpg?alt=media&token=40c78995-d134-4812-b159-4aa385678a4e");
+	background-image: url("/chitwan1.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 }

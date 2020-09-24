@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Searchcard from '../partials/Searchcard';
 import Packagecard from '../partials/Packagecard';
 import { useStateValue } from '../StateProvider';
 import { db } from '../Firebase';
-import './Packages.css'
+import { gsap } from 'gsap';
+import './Packages.css';
 
 function Packages() {
+	const revealRefs = useRef([]);
+	revealRefs.current = [];
+
 	const [{search}, dispatch] = useStateValue();
 
 	const [packageSearch,setPackageSearch] = useState(search);
@@ -13,6 +17,12 @@ function Packages() {
 
 	const [packages,setPackages] = useState([]);
 	const [result,setResult] = useState([]);
+
+	const addToRefs = (e) => {
+		if(e && !revealRefs.current.includes(e)){
+			revealRefs.current.push(e);
+		}
+	}
 
 	useEffect(()=>{
 		db.collection("project")
@@ -22,12 +32,38 @@ function Packages() {
 					pack.id = doc.id;
 					setPackages(packages => [...packages, pack]);
 				})
+
+				revealRefs.current.forEach((el, index) => {
+		 
+					gsap.from(el,{
+						scrollTrigger: "el",
+						duration: 0.3,
+						opacity: 0,
+						x: '-100',
+						ease: 'circ.out',
+						delay: index * 0.2,
+					});
+			 
+				});
 			})
+
+		
 
 		if(!(search === '')){
 			searchPackage();
 		}
 	}, []);
+
+	useEffect(()=>{
+		if(search){
+			gsap.from('#searchresult',{
+				duration: 0.3,
+				opacity: 0,
+				y: '-100',
+				ease: 'circ.out',
+			});
+		}
+	}, [search]);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -57,8 +93,8 @@ function Packages() {
 	};
 
 	return (
-		<div className="packages">
-			<div className="packages-body">
+		<div className="section">
+			<div className="section-body">
 				<form className="packages-form">
 					<div className="packages-form-inputplace">
 						<input type="text" name="search" placeholder="Search package" value={packageSearch} onChange={e => setPackageSearch(e.target.value)}/>
@@ -79,7 +115,7 @@ function Packages() {
 
 				{
 					search === '' ? '':
-					<div>
+					<div id="searchresult">
 						<div className="packages-title">Search Result for "{search}" :</div>
 						<div className="packages-tableTitle">
 							<div className="packages-name">Package Name</div>
@@ -99,7 +135,9 @@ function Packages() {
 
 				<div className="packages-title">Our Packages :</div>
 				{packages.map( pack => (
-					<Packagecard key={pack.id} pack={pack}/>
+					<div ref={addToRefs} key={pack.id}>
+						<Packagecard pack={pack}/>
+					</div>
 				))}
 			</div>
 		</div>
